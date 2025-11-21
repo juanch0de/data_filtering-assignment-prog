@@ -1,0 +1,24 @@
+import openpyxl
+import numpy as np
+
+excel = openpyxl.load_workbook("resultado_laboratorio_suelo.xlsx", read_only = True)
+
+hoja = excel[excel.sheetnames[0]]
+hoja.calculate_dimension(force=True)
+
+propiedades_columnas1 = hoja.iter_rows(min_row=1,max_row=1,values_only=True)
+propiedades_columnas2 = hoja.iter_rows(min_row=3,max_row=3,values_only=True)
+
+propiedades1 = []
+propiedades2 = []
+
+for propiedad in propiedades_columnas1:
+    for cell in propiedad:
+        propiedades1.append(cell)
+
+for propiedad in propiedades_columnas2:
+    for cell in propiedad:
+        propiedades2.append(cell)
+
+for index, propiedad in enumerate(propiedades1):
+    print(f"{propiedades1[index]} - {propiedades2[index]}\n")
